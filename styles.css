@@ -1,0 +1,193 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0a0a0a;
+    color: #f5f5f5;
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.hero {
+    width: 100%;
+    max-width: 900px;
+    position: relative;
+}
+
+/* Main Title */
+.main-title {
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 900;
+    text-align: center;
+    line-height: 1.1;
+    margin-bottom: 40px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    /* Grainy/distressed effect */
+    filter: contrast(1.2) brightness(1.1);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.main-title .disappear {
+    display: block;
+    font-size: 1.3em;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+}
+
+/* Collage Section */
+.collage {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 40px;
+    max-height: 500px;
+    aspect-ratio: 1;
+}
+
+.collage-item {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    border: 3px solid #0a0a0a;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Grainy/distressed texture overlay */
+.collage-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise" seed="2"/></filter><rect width="100" height="100" fill="%23222" filter="url(%23noise)"/></svg>');
+    background-size: 100px 100px;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.collage-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Different items can have different effects */
+.item-1 {
+    background: linear-gradient(45deg, #1a1a1a 0%, #2a2a2a 100%);
+    animation: flicker 3s infinite;
+}
+
+.item-2 {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+}
+
+.item-3 {
+    background: linear-gradient(225deg, #1a1a1a 0%, #2a2a2a 100%);
+}
+
+.item-4 {
+    background: linear-gradient(315deg, #2a2a2a 0%, #1a1a1a 100%);
+}
+
+/* Flicker animation for distressed effect */
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.95; }
+}
+
+/* Subtitle */
+.subtitle {
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    line-height: 1.8;
+    font-style: italic;
+    color: #d0d0d0;
+    letter-spacing: 0.02em;
+}
+
+.subtitle p {
+    margin: 8px 0;
+}
+
+/* Footer Text */
+.footer-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 2px solid #333;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #888;
+}
+
+.release-date {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: clamp(2rem, 8vw, 4rem);
+        margin-bottom: 30px;
+    }
+
+    .collage {
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+
+    .subtitle {
+        font-size: clamp(0.9rem, 2vw, 1.2rem);
+        margin-bottom: 40px;
+    }
+
+    .footer-text {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        border-top: none;
+    }
+}
+
+/* Grain effect overlay for entire page */
+@media (prefers-reduced-motion: no-preference) {
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" result="noise"/></filter><rect width="200" height="200" fill="%23000" filter="url(%23noise)"/></svg>');
+        background-size: 200px 200px;
+        opacity: 0.05;
+        pointer-events: none;
+        z-index: 999;
+    }
+}
